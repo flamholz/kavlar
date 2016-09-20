@@ -1,0 +1,194 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML LANG=HE DIR=RTL>
+<HEAD>
+<!--Copyright 2012 Mechon Mamre, 12 Hayyim Vital, Jerusalem-->
+<!--If you need a similar keyboard on your Torah oriented site, you may use the code here, if and only if you have a link to this page, so that your users can get to http://www.mechon-mamre.org/ easily, if they want; if you have a non-Torah site, please ask for permission.-->
+<META HTTP-EQUIV="Content-Script-Type" CONTENT="text/javascript">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+<TITLE>Search Google - Cantillation Marks / Mechon Mamre</TITLE>
+
+<LINK REL="stylesheet" HREF="c_search.css" TYPE="text/css">
+
+<SCRIPT TYPE="text/javascript">
+<!--
+function Add2Str(str){document.form1.q.value+=str;document.form1.q.focus();}
+function Add2StrQuo1(str){str='\'';Add2Str(str);}
+function Add2StrQuo2(str){str='\"';Add2Str(str);}
+function BkSpChar(){var str;var strlen=document.form1.q.value.length;str=document.form1.q.value.substring(0,strlen-1);document.form1.q.value=str;document.form1.q.focus();}
+-->
+</SCRIPT>
+<SCRIPT TYPE="text/javascript" SRC="um.js"></SCRIPT>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+<DIV DIR="RTL" LANG="HE" ALIGN="RIGHT">
+
+<H1>חיפוש בתנ"ך עם טעמי המקרא דרך Google.com</H1>
+
+<P CLASS=s><A HREF="http://www.mechon-mamre.org/searchgh.htm">חיפוש בכל האתר</A>        <A HREF="c0.htm">תנ"ך עם טעמי המקרא</A></P>
+
+<FORM METHOD="get" name=form1 ACTION="http://www.google.com/cse" id="cse-search-box">
+
+<TABLE>
+<TR>
+<TD WIDTH=82>שוואין:</TD>
+<TD><INPUT class=btnsm style="height:28;width:42" TYPE=button value='רגיל' onclick="Add2Str('ְ')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:42" TYPE=button value="קמץ" onclick="Add2Str('ֳ')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:42" TYPE=button value="פתח" onclick="Add2Str('ֲ')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:42" TYPE=button value="סגול" onclick="Add2Str('ֱ')"></TD>
+<TD WIDTH=16> </TD>
+<TD WIDTH=42> </TD>
+<TD WIDTH=42> </TD>
+<TD WIDTH=42> </TD>
+<TD WIDTH=42> </TD>
+<TD><INPUT class=btnsm style="height:28;width:84" TITLE=" מתג או געיה " TYPE=button value="מתג" onclick="Add2Str('ֽ')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:84" TITLE=" סוף פסוק או סילוק " TYPE=button value="סוף פ'" onclick="Add2Str('׃')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:84" TITLE=" אתנחתא, אתנח, או אתנחא " TYPE=button value="אתנח" onclick="Add2Str('֑')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:84" TITLE=" סגול או סגולתא " TYPE=button value="סגול" onclick="Add2Str('֒')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:84" TITLE=" שלשלת " TYPE=button value="שלשל" onclick="Add2Str('֓')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:84" TITLE=" פסק (וגם חלק משלשלת או לגרמיה) " TYPE=button value="פסק" onclick="Add2Str(' ׀')"></TD>
+</TR>
+</TABLE>
+
+<TABLE>
+<TR>
+<TD WIDTH=72>תנועות:</TD>
+<TD><INPUT class=btnsm style="height:28;width:42" TYPE=button value="קמץ" onclick="Add2Str('ָ')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:42" TYPE=button value="פתח" onclick="Add2Str('ַ')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:42" TYPE=button value="צירי" onclick="Add2Str('ֵ')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:42" TYPE=button value="סגול" onclick="Add2Str('ֶ')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:42" TYPE=button value="חיריק" onclick="Add2Str('ִ')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:42" TYPE=button value="חולם" onclick="Add2Str('ֹ')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:42" TYPE=button value="שורוק" onclick="Add2Str('ּ')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:42" TYPE=button value="קובוץ" onclick="Add2Str('ֻ')"></TD>
+<TD WIDTH=26> </TD>
+<TD><INPUT class=btnsm style="height:28;width:84" TITLE=" זקף קטן " TYPE=button value="זקף ק'" onclick="Add2Str('֔')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:84" TITLE=" זקף גדול " TYPE=button value="זקף ג'" onclick="Add2Str('֕')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:84" TITLE=" טפחא, טרחא, או דחי לפני סוף פסוק (גם כטעם משנה לפני אתנח בתיבה אחת) " TYPE=button value="טפחא" onclick="Add2Str('֖')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:84" TITLE=" רביעי או רביע " TYPE=button value="רביע" onclick="Add2Str('֗')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:84" TITLE=" זרקא (בן זוג של סגול) " TYPE=button value="זרקא" onclick="Add2Str('֮')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:84" TITLE=" פשטא או קדמא לפני זקף, השני בתרי קדמין או תרין פשטין " TYPE=button value="פשטא" onclick="Add2Str('֙')"></TD>
+</TR>
+</TABLE>
+
+<TABLE>
+<TR>
+<TD WIDTH=62>עזרים:</TD>
+<TD><INPUT class=btnsm style="height:28;width:42" TYPE=button value="דגש" onclick="Add2Str('ּ')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:42" TYPE=button value="שין" onclick="Add2Str('ׁ')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:42" TYPE=button value="סין" onclick="Add2Str('ׂ')"></TD>
+<TD><INPUT class=btn style="height:28;width:42" TYPE=button value="+" onclick="Add2Str('+')"></TD>
+<TD><INPUT class=btn style="height:28;width:42" TYPE=button value="-" onclick="Add2Str('-')"></TD>
+<TD><INPUT class=btn style="height:28;width:42" TYPE=button value="'" onclick="Add2StrQuo1('%27')"></TD>
+<TD><INPUT class=btn style="height:28;width:42" TYPE=button value='"' onclick="Add2StrQuo2('%22')"></TD>
+<TD WIDTH=36> </TD>
+<TD WIDTH=42> </TD>
+<TD><INPUT class=btnsm style="height:28;width:84" TITLE=" יתיב או יתיב מוקדם " TYPE=button value="יתיב" onclick="Add2Str('֚')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:84" TITLE=" תביר " TYPE=button value="תביר" onclick="Add2Str('֛')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:84" TITLE=" גרש, גריש, או אתי " TYPE=button value="גרש" onclick="Add2Str('֜')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:84" TITLE=" גרש מודקם, מופיע לפני בריע בתהילים, איוב, ומשלי " TYPE=button value="גרש מ'" onclick="Add2Str('֝')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:84" TITLE=" גרשיים, שני גרישין, או תרין טרסין " TYPE=button value="גרשים" onclick="Add2Str('֞')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:84" TITLE=" קרני פרה או פזר גדול " TYPE=button value="קרני" onclick="Add2Str('֟')"></TD>
+</TR>
+</TABLE>
+
+<TABLE>
+<TR>
+<TD WIDTH=8> </TD>
+<TD><INPUT class=btn style="height:28;width:42" TYPE=button value="פ" onclick="Add2Str('פ')"></TD>
+<TD><INPUT class=btn style="height:28;width:42" TYPE=button value="ם" onclick="Add2Str('ם')"></TD>
+<TD><INPUT class=btn style="height:28;width:42" TYPE=button value="ן" onclick="Add2Str('ן')"></TD>
+<TD><INPUT class=btn style="height:28;width:42" TYPE=button value="ו" onclick="Add2Str('ו')"></TD>
+<TD><INPUT class=btn style="height:28;width:42" TYPE=button value="ט" onclick="Add2Str('ט')"></TD>
+<TD><INPUT class=btn style="height:28;width:42" TYPE=button value="א" onclick="Add2Str('א')"></TD>
+<TD><INPUT class=btn style="height:28;width:42" TYPE=button value="ר" onclick="Add2Str('ר')"></TD>
+<TD><INPUT class=btn style="height:28;width:42" TYPE=button value="ק" onclick="Add2Str('ק')"></TD>
+<TD WIDTH=42> </TD>
+<TD WIDTH=42> </TD>
+<TD WIDTH=86> </TD>
+<TD><INPUT class=btnsm style="height:28;width:84" TITLE=" תלישא גדולה, תלשא, תלשא ימין " TYPE=button value="תלשא גדולה" onclick="Add2Str('֠')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:84" TITLE=" פזר או פזר קטן (או פזר גדול!) " TYPE=button value="פזר" onclick="Add2Str('֡')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:84" TITLE=" מונח או שופר הולך " TYPE=button value="מונח" onclick="Add2Str('֣')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:84" TITLE=" מהפך, שופר מהופך, או שפר הפוך " TYPE=button value="מהפך" onclick="Add2Str('֤')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:84" TITLE=" מרכא, מאריך, מארכה (גם חלק שני של עולה ויורד) " TYPE=button value="מרכא" onclick="Add2Str('֥')"></TD>
+</TR>
+</TABLE>
+
+<TABLE>
+<TR>
+<TD><INPUT class=btn style="height:28;width:42" TYPE=button value="ף" onclick="Add2Str('ף')"></TD>
+<TD><INPUT class=btn style="height:28;width:42" TYPE=button value="ך" onclick="Add2Str('ך')"></TD>
+<TD><INPUT class=btn style="height:28;width:42" TYPE=button value="ל" onclick="Add2Str('ל')"></TD>
+<TD><INPUT class=btn style="height:28;width:42" TYPE=button value="ח" onclick="Add2Str('ח')"></TD>
+<TD><INPUT class=btn style="height:28;width:42" TYPE=button value="י" onclick="Add2Str('י')"></TD>
+<TD><INPUT class=btn style="height:28;width:42" TYPE=button value="ע" onclick="Add2Str('ע')"></TD>
+<TD><INPUT class=btn style="height:28;width:42" TYPE=button value="כ" onclick="Add2Str('כ')"></TD>
+<TD><INPUT class=btn style="height:28;width:42" TYPE=button value="ג" onclick="Add2Str('ג')"></TD>
+<TD><INPUT class=btn style="height:28;width:42" TYPE=button value="ד" onclick="Add2Str('ד')"></TD>
+<TD><INPUT class=btn style="height:28;width:42" TYPE=button value="ש" onclick="Add2Str('ש')"></TD>
+<TD WIDTH=98> </TD>
+<TD><INPUT class=btnsm style="height:28;width:84" TITLE=" מרכא כפולה או תרי טעמי " TYPE=button value="מרכא כפולה" onclick="Add2Str('֦')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:84" TITLE=" דרגא " TYPE=button value="דרגא" onclick="Add2Str('֧')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:84" TITLE=" קדמא, אזלא, או אזיל (גם חלק ראשין בתרי קדמין או תרין פשטין או לפני זקף בתיבה אחת) " TYPE=button value="קדמא" onclick="Add2Str('֨')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:84" TITLE=" תלשא קטנה, תלשא, או תלשא שמאל " TYPE=button value="תלשא קטנה" onclick="Add2Str('֩')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:84" TITLE=" גלגל, ירח בן יומו, או אתנח הפוך " TYPE=button value="גלגל" onclick="Add2Str('֪')"></TD>
+</TR>
+</TABLE>
+
+<TABLE>
+<TR>
+<TD WIDTH=28> </TD>
+<TD><INPUT class=btn style="height:28;width:42" TYPE=button value="ץ" onclick="Add2Str('ץ')"></TD>
+<TD><INPUT class=btn style="height:28;width:42" TYPE=button value="ת" onclick="Add2Str('ת')"></TD>
+<TD><INPUT class=btn style="height:28;width:42" TYPE=button value="צ" onclick="Add2Str('צ')"></TD>
+<TD><INPUT class=btn style="height:28;width:42" TYPE=button value="מ" onclick="Add2Str('מ')"></TD>
+<TD><INPUT class=btn style="height:28;width:42" TYPE=button value="נ" onclick="Add2Str('נ')"></TD>
+<TD><INPUT class=btn style="height:28;width:42" TYPE=button value="ה" onclick="Add2Str('ה')"></TD>
+<TD><INPUT class=btn style="height:28;width:42" TYPE=button value="ב" onclick="Add2Str('ב')"></TD>
+<TD><INPUT class=btn style="height:28;width:42" TYPE=button value="ס" onclick="Add2Str('ס')"></TD>
+<TD><INPUT class=btn style="height:28;width:42" TYPE=button value="ז" onclick="Add2Str('ז')"></TD>
+<TD WIDTH=12> </TD>
+<TD WIDTH=8> </TD>
+<TD><INPUT class=btnsm style="height:28;width:84" TITLE=" חלך ראשון בעולה ויורד " TYPE=button value="עולה" onclick="Add2Str('֫')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:84" TITLE=" עילוי " TYPE=button value="עילוי" onclick="Add2Str('֬')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:84" TITLE=" דחי לפני אתנח בתהילים, איוב, ומשלי " TYPE=button value="דחי" onclick="Add2Str('֭')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:84" TITLE=" צינורית שלא לפני סגול אלא מופיע בתהילים, איוב, ומשלי " TYPE=button value="צינור" onclick="Add2Str('֘')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:84" TITLE=' מקף שמחבר מילים בתנ"ך ואין להשתמש ב"מקף" של עברית החדשה' TYPE=button value="מקף" onclick="Add2Str('־')"></TD>
+<TD><INPUT class=btnsm style="height:28;width:84" TITLE=' נקודה עליונה להדגש ' TYPE=button value="נקודה" onclick="Add2Str('ׄ')"></TD>
+</TR>
+</TABLE>
+
+<TABLE>
+<TR>
+<TD WIDTH=28> </TD>
+<TD><INPUT class=btn style="height:28;width:308" TYPE=button onclick="Add2Str(' ')" value="ריוח" ALIGN=MIDDLE></TD>
+<TD>  </TD>
+<TD><INPUT class=btnsm style="height:28;width:86;background-color:#FFEEEE" TYPE=button onclick="BkSpChar()" value="BkSp"></TD>
+<TD>  </TD>
+<TD><INPUT class=btn TYPE="RESET" name="query" style="height:28;background-color:#FFEEEE" onclick="BkSpChar()" value="התחל מחדש!"></TD>
+</TR>
+</TABLE>
+
+<INPUT type="hidden" name="cx" value="003922636974222575695:dxq675sw--g">
+<INPUT type="hidden" name="ie" value="UTF-8">
+<INPUT class=btnbig type="text" name="q" size=26 maxlength=208 value="">
+<INPUT class=btn type="submit" name="sa" value=" חפש! " style="height:36;background-color:#EEFFEE">
+<INPUT type="hidden" name="hq" value="inurl:/c/ct/">
+<INPUT type=hidden name=lr value=lang_iw>
+<INPUT type=hidden name=oe value=UTF-8>
+
+<P class=s>סדר כתיבת מרכיבי טקסט:  אות; דגש, אם יש; נקודת שין או סין (לשין ימינית או שין שמאלית), אם יש; תנועה; מתג, אם יש; טעם.  שים לב שמנוע החיפוש של גוגל לא מוצא טקסט עם ניקוד אלא אם כן יש ניקוד מדויק בחיפושך, אבל בחיפוש טקסט מנוקד הוא כן מוצא טקסט ללא ניקוד באותו הכתיב; וכן בעניין טעמי המקרא!</P>
+
+</FORM>
+
+<P class=m>יש לך שאלה או הערה?  <SCRIPT TYPE="text/javascript">email('c_search')</SCRIPT></P>
+
+<SCRIPT TYPE="text/javascript">
+<!--
+document.form1.q.focus();
+-->
+</SCRIPT>
+
+</DIV>
+</BODY>
+</HTML>

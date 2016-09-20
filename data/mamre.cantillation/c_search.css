@@ -1,0 +1,16 @@
+body {font-family:"Shlomo LB","Ezra SIL SR","Ezra SIL","Keter YG","Keter Aram Tsova","Taamey David CLM","Taamey Frank CLM","SBL Hebrew",code2000,Cardo,"Guttman Vilna-Normal",Galaxie,"Frank Ruehl CLM","Arial Unicode MS";color:#000000;background-color:#FFFFFF;margin:1.5em;}
+p {font-size:140%;line-height:150%;text-align:right;margin-bottom:1em;}
+p.j {font-size:140%;line-height:150%;text-align:justify;}
+p.m {font-size:110%;line-height:120%;text-align:justify;}
+p.s {font-size:90%;line-height:120%;text-align:right;}
+h1 {font-size:200%;text-align:right;}
+h2 {font-size:170%;text-align:right;}
+big {font-size:120%;vertical-align:-7%;}
+b {font-size:70%;vertical-align:9%;font-weight:bold}
+small {font-size:80%;vertical-align:10%;font-weight:bold}
+sup {font-size:115%;vertical-align:15%;}
+
+.btn {font-family:"Ezra SIL SR","Ezra SIL",code2000,Cardo,"Guttman Vilna-Normal",Galaxie,"Arial Unicode MS";cursor:auto;font-weight:normal;font-size:100%;color:#000000;background-color:#FFFFEE}
+.btnbig {font-family:"Ezra SIL SR","Ezra SIL",code2000,Cardo,"Guttman Vilna-Normal",Galaxie,"Arial Unicode MS";font-weight:normal;font-size:200%;color:#000000;background-color:#FFFFFF}
+.btnsm {font-family:"Ezra SIL SR","Ezra SIL",code2000,Cardo,"Guttman Vilna-Normal",Galaxie,"Arial Unicode MS";cursor:auto;font-weight:normal;font-size:80%;color:#000000;background-color:#FFFFEE}
+td {font-size:110%;line-height:150%;text-align:right;vertical-align:top;margin-bottom:1em;}
