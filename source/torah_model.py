@@ -8,6 +8,10 @@ class Stream(object):
 	def append_to_stream(self, elt):
 		self.stream.append(elt)
 
+	@property
+	def iter_stream(self):
+		return iter(self.stream)
+
 
 class Sefer(Stream):
 	"""Which of the books, e.g. Genesis, Exodus etc."""

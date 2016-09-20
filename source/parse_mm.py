@@ -44,7 +44,7 @@ class MechonMamreParser(object):
 			fname: path to Mechon Mamre file.
 		"""
 		with open(fname, 'rU') as f:
-			self.parse_sefer_file(f)
+			return self.parse_sefer_file(f)
 
 	def parse_sefer_file(self, f):
 		"""Parses the Mechon Mamre file pointed to by f.
