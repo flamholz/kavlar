@@ -9,10 +9,10 @@ from torah_model import Perek
 
 class MechonMamreParserTest(unittest.TestCase):
 
-	def test_upper(self):
+	def test_parse_sefer_filename(self):
 		parser = MechonMamreParser()
 		sefer = parser.parse_sefer_filename('../data/mamre.cantillation/c01.htm')
-		
+
 		for perek in sefer.iter_stream:
 			self.assertEquals(Perek, type(perek))
 
