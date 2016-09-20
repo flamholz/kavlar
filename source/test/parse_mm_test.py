@@ -16,6 +16,10 @@ class MechonMamreParserTest(unittest.TestCase):
 		for perek in sefer.iter_stream:
 			self.assertEquals(Perek, type(perek))
 
+		n_perakim = len(sefer.stream)
+		expected_perakim = 50  # Bereshit has 50
+		self.assertEquals(expected_perakim, n_perakim)
+
 
 if __name__ == '__main__':
 	unittest.main()
