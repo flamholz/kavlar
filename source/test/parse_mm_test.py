@@ -6,7 +6,7 @@ import unittest
 from lxml import etree
 from os import path
 from parse_mm import MechonMamreParser
-from torah_model import Perek, TextFragment
+from torah_model import Perek, PasukFragment
 from torah_model import Sefer, PasukStart
 
 
@@ -36,7 +36,7 @@ class MechonMamreParserTest(unittest.TestCase):
 		perek = sefer.stream[random_perek]
 		expected_pasuk_index = 0
 		for elt in perek.iter_stream:
-			if type(elt) == TextFragment:
+			if type(elt) == PasukFragment:
 				actual_psukim += 1
 			if type(elt) == PasukStart:
 				# Pasuk indices increment
@@ -77,7 +77,7 @@ class MechonMamreParserTest(unittest.TestCase):
 		expected_psukim = 16  # has 16 psukim
 		actual_psukim = 0
 		for elt in perek17.iter_stream:
-			if type(elt) == TextFragment:
+			if type(elt) == PasukFragment:
 				actual_psukim += 1
 		self.assertEquals(expected_psukim, actual_psukim)
 

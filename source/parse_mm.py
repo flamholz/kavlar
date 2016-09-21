@@ -94,20 +94,28 @@ class MechonMamreParser(object):
 
 			# Iterate over the text of the pasuk, until we hit the next one.
 			sib = pp.nextSibling
-			accumulated_pasuk = []
+			current_pasuk_fragment = torah_model.PasukFragment(pasuk_id)
 			while sib:
 				tag_name = self.get_tag_name(sib)
 				if tag_name and tag_name.lower() in self.BREAKING_TAGS:
 					break
+				elif tag_name:
+					child = torah_model.FormattedText.from_tag_name(
+						unicode(sib), tag_name)
+					current_pasuk_fragment.append_to_stream(child)
+				else:
+					child = torah_model.TextFragment(unicode(sib))
+					current_pasuk_fragment.append_to_stream(child)
 
-				accumulated_pasuk.append(unicode(sib))
+				# Move to next sibling
 				sib = sib.nextSibling
 
-			pasuk_text = ''.join(accumulated_pasuk)
-			pasuk_text, delim = self.strip_parsha_delimiter(pasuk_text)
-			text_frag = torah_model.TextFragment(pasuk_text)
-			current_perek.append_to_stream(text_frag)
+			current_perek.append_to_stream(current_pasuk_fragment)
 
+			# TODO: what if the delimiter is not at the end of the fragment?
+			tail_text = current_pasuk_fragment.stream[-1].text
+			stripped_tail_text, delim = self.strip_parsha_delimiter(tail_text)
+			current_pasuk_fragment.stream[-1].text = stripped_tail_text
 			if delim is not None:
 				pdelim = torah_model.ParashaDelimiter.from_letter_code(delim)
 				current_perek.append_to_stream(pdelim)
