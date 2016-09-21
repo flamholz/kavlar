@@ -26,6 +26,6 @@ This is a partial list of the layout traditions that we know of. It is not yet c
 * special formatting for the Ten Commandments in both Exodus and Deuteronomy.
 
 ## Dependencies
-Kavlar depends on the following Python libraries
+Kavlar depends on the following Python libraries, which can all be installed with pip.
 * [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) for HTML parsing
 * [lxml](http://lxml.de/) for XML parsing and generation
