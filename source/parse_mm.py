@@ -101,7 +101,7 @@ class MechonMamreParser(object):
 					break
 				elif tag_name:
 					child = torah_model.FormattedText.from_tag_name(
-						unicode(sib), tag_name)
+						sib.text, tag_name)
 					current_pasuk_fragment.append_to_stream(child)
 				else:
 					child = torah_model.TextFragment(unicode(sib))

@@ -210,14 +210,13 @@ class TextFragment(XmlAble):
 	def __init__(self, text):
 		"""A fragment of a verse.
 
-		Usually contains the whole verse, except in weird scenarios
-		where the verse is split by a ParashaDelimiter. Markup may
-		be included in the verse text in the event of special
-		formatting for a character, for example the big/small letters.
+		Usually contains the whole verse, except in scenarios where
+		there is some markup inside the verse for formatting, e.g.
+		large and small letters.
 		
 		Args:
 			text: the Hebrew text of the the verse fragment.
-				May include markup.
+				May not include markup. It will be escaped.
 		"""
 		self.text = text
 
@@ -266,7 +265,7 @@ class FormattedText(TextFragment):
 	def from_xml_elt(cls, xml_elt):
 		tag = xml_elt.tag
 		kind = cls.NAME_CODES[tag]
-		return cls(kind, xml_elt.text)
+		return cls(xml_elt.text, kind)
 
 	@classmethod
 	def from_tag_name(cls, text, tag_name):
