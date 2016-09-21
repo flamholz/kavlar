@@ -3,6 +3,7 @@
 
 import unittest
 
+from lxml import etree
 from parse_mm import MechonMamreParser
 from torah_model import Perek, TextFragment
 
@@ -32,7 +33,18 @@ class MechonMamreParserTest(unittest.TestCase):
 			if type(elt) == TextFragment:
 				actual_psukim += 1
 		self.assertEquals(expected_psukim, actual_psukim)
-		
+
+	def test_make_xml(self):
+		parser = MechonMamreParser()
+		sefer = parser.parse_sefer_filename('../data/mamre.cantillation/c01.htm')
+
+		root = etree.Element('root')
+		sefer.add_to_xml_tree(root)
+
+		with open('tmp.xml', 'w') as f:
+			f.write(etree.tostring(root, pretty_print=True, encoding='utf-8'))
+			print 'wrote to tmp.xml'
+
 
 if __name__ == '__main__':
 	unittest.main()
