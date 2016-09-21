@@ -60,6 +60,10 @@ class MechonMamreParserTest(unittest.TestCase):
 				actual_psukim += 1
 		self.assertEquals(expected_psukim, actual_psukim)
 
+		# Checks that the XML can be made.
+		torah_xml_elt = torah.to_xml_elt()
+		xml = etree.tostring(torah_xml_elt, pretty_print=True, encoding='utf-8')
+
 	def test_make_xml(self):
 		parser = MechonMamreParser()
 		sefer = parser.parse_sefer_filename('../data/mamre.cantillation/c01.htm')
@@ -67,9 +71,8 @@ class MechonMamreParserTest(unittest.TestCase):
 		root = etree.Element('root')
 		sefer.add_to_xml_tree(root)
 
-		with open('tmp.xml', 'w') as f:
-			f.write(etree.tostring(root, pretty_print=True, encoding='utf-8'))
-			print 'wrote to tmp.xml'
+		# Checks that the XML can be made.
+		xml = etree.tostring(root, pretty_print=True, encoding='utf-8')
 
 
 if __name__ == '__main__':
