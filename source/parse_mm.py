@@ -44,14 +44,14 @@ class MechonMamreParser(object):
 	# Tags on which to break the fragment
 	BREAKING_TAGS = ('br', 'b')
 
-	def parse_sefer_filename(self, fname):
+	def parse_sefer_filename(self, fname, sefer_idx=0):
 		"""Parses the Mechon Mamre file pointed to by f.
 
 		Args:
 			fname: path to Mechon Mamre file.
 		"""
 		with open(fname, 'rU') as f:
-			return self.parse_sefer_file(f)
+			return self.parse_sefer_file(f, sefer_idx)
 
 	def parse_sefer_file(self, f, sefer_idx=0):
 		"""Parses the Mechon Mamre sefer file pointed to by f.
@@ -77,6 +77,7 @@ class MechonMamreParser(object):
 			if (current_perek is None or
 				current_perek.perek != perek_str):
 				perek_idx += 1
+				pasuk_idx = -1  # Reset pasuk counter
 				perek_id = 'perek_%d:%d' % (sefer_idx, perek_idx)
 				current_perek = torah_model.Perek(
 					perek_str, perek_idx, perek_id)
@@ -116,16 +117,16 @@ class MechonMamreParser(object):
 	def parse_torah_files(self, fs):
 		"""Parses a list of Sefer files into a Torah object."""
 		t = torah_model.Torah()
-		for f in fs:
-			sefer = self.parse_sefer_file(f)
+		for i, f in enumerate(fs):
+			sefer = self.parse_sefer_file(f, sefer_idx=i)
 			t.append_to_stream(sefer)
 		return t
 
 	def parse_torah_filenames(self, fnames):
 		"""Parses a list of Sefer files into a Torah object."""
 		t = torah_model.Torah()
-		for fname in fnames:
-			sefer = self.parse_sefer_filename(fname)
+		for i, fname in enumerate(fnames):
+			sefer = self.parse_sefer_filename(fname, sefer_idx=i)
 			t.append_to_stream(sefer)
 		return t
 

@@ -6,14 +6,18 @@ import unittest
 from lxml import etree
 from os import path
 from parse_mm import MechonMamreParser
-from torah_model import Perek, TextFragment, Sefer
+from torah_model import Perek, TextFragment
+from torah_model import Sefer, PasukStart
 
 
 class MechonMamreParserTest(unittest.TestCase):
 
 	def test_parse_sefer_filename(self):
 		parser = MechonMamreParser()
-		sefer = parser.parse_sefer_filename('../data/mamre.cantillation/c01.htm')
+		sefer_idx = 91
+		sefer = parser.parse_sefer_filename(
+			'../data/mamre.cantillation/c01.htm', sefer_idx)
+		self.assertEquals(sefer_idx, sefer.sefer_idx)
 
 		for perek in sefer.iter_stream:
 			self.assertEquals(Perek, type(perek))
@@ -30,9 +34,16 @@ class MechonMamreParserTest(unittest.TestCase):
 		expected_psukim = 24  # has 24 psukim
 		actual_psukim = 0
 		perek = sefer.stream[random_perek]
+		expected_pasuk_index = 0
 		for elt in perek.iter_stream:
 			if type(elt) == TextFragment:
 				actual_psukim += 1
+			if type(elt) == PasukStart:
+				# Pasuk indices increment
+				self.assertEquals(
+					expected_pasuk_index, elt.pasuk_idx)
+				expected_pasuk_index += 1
+		# Expected number of psukim
 		self.assertEquals(expected_psukim, actual_psukim)
 
 	def test_parse_torah_filename(self):
@@ -42,10 +53,20 @@ class MechonMamreParserTest(unittest.TestCase):
 		fnames = [path.join(base_fname, fname) for fname in fnames]
 		torah = parser.parse_torah_filenames(fnames)
 
-		for sefer in torah.iter_stream:
+		for sidx, sefer in enumerate(torah.iter_stream):
 			self.assertEquals(Sefer, type(sefer))
-			for perek in sefer.iter_stream:
+			self.assertEquals(sidx, sefer.sefer_idx)
+			for pidx, perek in enumerate(sefer.iter_stream):
 				self.assertEquals(Perek, type(perek))
+				self.assertEquals(pidx, perek.perek_idx)
+
+				# Pasuk indices should increment
+				expected_pasuk_index = 0
+				for elt in perek.iter_stream:
+					if type(elt) == PasukStart:
+						self.assertEquals(
+							expected_pasuk_index, elt.pasuk_idx)
+						expected_pasuk_index += 1
 
 		n_sefarim = len(torah.stream)
 		expected_sefarim = 5
