@@ -1,0 +1,11 @@
+{
+	"config_name": "gen_xml_five_books",
+	"html_filenames": [
+		"../data/mamre.cantillation/c01.htm", 
+		"../data/mamre.cantillation/c02.htm", 
+		"../data/mamre.cantillation/c03.htm", 
+		"../data/mamre.cantillation/c04.htm", 
+		"../data/mamre.cantillation/c05.htm"
+	],
+	"output_filename": "torah.xml"
+}

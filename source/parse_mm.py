@@ -1,7 +1,14 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-"""Parses Mechon Mamre text into a torah model hierarchy."""
+"""Parses Mechon Mamre text into a torah model hierarchy.
+
+Note that the Mechon Mamre HTML files are hand-generated. Their conventions
+are not consistent between the various filetypes that you download from their
+server. This code is tested with the "Hebrew with cantillation marks" files,
+which were downloaded on 09/20/2016 and are checked into
+	../data/mamre.cantillation/
+"""
 
 import re
 import torah_model
