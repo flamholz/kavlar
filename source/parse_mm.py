@@ -47,7 +47,7 @@ class MechonMamreParser(object):
 			return self.parse_sefer_file(f)
 
 	def parse_sefer_file(self, f):
-		"""Parses the Mechon Mamre file pointed to by f.
+		"""Parses the Mechon Mamre sefer file pointed to by f.
 
 		Args:
 			f: file handle to Mechon Mamre file.
@@ -95,5 +95,21 @@ class MechonMamreParser(object):
 				current_perek.append_to_stream(pdelim)
 
 		return sefer
+
+	def parse_torah_files(self, fs):
+		"""Parses a list of Sefer files into a Torah object."""
+		t = torah_model.Torah()
+		for f in fs:
+			sefer = self.parse_sefer_file(f)
+			t.append_to_stream(sefer)
+		return t
+
+	def parse_torah_filenames(self, fnames):
+		"""Parses a list of Sefer files into a Torah object."""
+		t = torah_model.Torah()
+		for fname in fnames:
+			sefer = self.parse_sefer_filename(fname)
+			t.append_to_stream(sefer)
+		return t
 
 

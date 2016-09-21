@@ -29,6 +29,22 @@ class Stream(XmlAble):
 			child.add_to_xml_tree(xml_elt)
 
 
+class Torah(Stream):
+	"""Ordered stream of Sefarim."""
+	def __init__(self):
+		self.stream = []
+
+	def to_xml_elt(self):
+		self_xml = etree.Element(
+			self.__class__.__name__)
+		self.add_stream_to_xml_tree(self_xml)
+		return self_xml
+
+	def add_to_xml_tree(self, xml_elt):
+		self_xml = self.to_xml_elt()
+		xml_elt.append(self_xml)
+
+
 class Sefer(Stream):
 	"""Which of the books, e.g. Genesis, Exodus etc."""
 	def __init__(self, name):
