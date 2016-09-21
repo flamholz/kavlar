@@ -42,7 +42,8 @@ def main():
 	print 'Writing XML output to', output_filename
 	with open(output_filename, 'w') as out_f:
 		xml_data = etree.tostring(
-			torah_xml_elt, pretty_print=True, encoding='utf-8')
+			torah_xml_elt, pretty_print=True,
+			xml_declaration=True, encoding='utf-8')
 		out_f.write(xml_data)
 
 
