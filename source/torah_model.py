@@ -47,8 +47,17 @@ class Torah(Stream):
 
 class Sefer(Stream):
 	"""Which of the books, e.g. Genesis, Exodus etc."""
-	def __init__(self, name):
+	def __init__(self, name, sefer_idx, sefer_id):
+		"""Initialize.
+
+		Args:
+			name: the name of the Sefer (Hebrew).
+			sefer_idx: the index of the Sefer in the compilation.
+			sefer_id: a unique identifier for this sefer.
+		"""
 		self.name = name
+		self.sefer_idx = sefer_idx
+		self.sefer_id = sefer_id
 		self.stream = []
 
 	def __unicode__(self):
@@ -62,20 +71,25 @@ class Sefer(Stream):
 
 	def add_to_xml_tree(self, xml_elt):
 		self_xml = etree.Element(
-			self.__class__.__name__, name=self.name)
+			self.__class__.__name__, name=self.name,
+			id=self.sefer_id, index=str(self.sefer_idx))
 		self.add_stream_to_xml_tree(self_xml)
 		xml_elt.append(self_xml)
 
 
 class Perek(Stream):
 	"""A chapter marker. Contains text fragments and various markers."""
-	def __init__(self, perek):
+	def __init__(self, perek, perek_idx, perek_id):
 		"""Initialize.
 
 		Args:
 			perek: the Hebrew perek demarcation.
+			perek_idx: the index of the perek in the sefer.
+			perek_id: a unique identifier for this perek.
 		"""
 		self.perek = perek
+		self.perek_idx = perek_idx
+		self.perek_id = perek_id
 		self.stream = []
 
 	def __unicode__(self):
@@ -86,20 +100,25 @@ class Perek(Stream):
 
 	def add_to_xml_tree(self, xml_elt):
 		self_xml = etree.Element(
-			self.__class__.__name__, perek=self.perek)
+			self.__class__.__name__, perek=self.perek,
+			id=self.perek_id, index=str(self.perek_idx))
 		self.add_stream_to_xml_tree(self_xml)
 		xml_elt.append(self_xml)
 
 
 class PasukStart(XmlAble):
 	"""Demarcates the start of a new verse."""
-	def __init__(self, pasuk):
+	def __init__(self, pasuk, pasuk_idx, pasuk_id):
 		"""Initialize.
 
 		Args:
-			perek: the Hebrew perek demarcation.
+			pasuk: the Hebrew pasuk demarcation.
+			pasuk_idx: the index of the pasuk in the perek.
+			pasuk_id: a unique identifier for this pasuk.
 		"""
 		self.pasuk = pasuk
+		self.pasuk_idx = pasuk_idx
+		self.pasuk_id = pasuk_id
 
 	def __unicode__(self):
 		return self.perek
@@ -109,7 +128,8 @@ class PasukStart(XmlAble):
 
 	def add_to_xml_tree(self, xml_elt):
 		self_xml = etree.Element(
-			self.__class__.__name__, pasuk=self.pasuk)
+			self.__class__.__name__, pasuk=self.pasuk,
+			id=self.pasuk_id, index=str(self.pasuk_idx))
 		xml_elt.append(self_xml)
 
 

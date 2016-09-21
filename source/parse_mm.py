@@ -53,7 +53,7 @@ class MechonMamreParser(object):
 		with open(fname, 'rU') as f:
 			return self.parse_sefer_file(f)
 
-	def parse_sefer_file(self, f):
+	def parse_sefer_file(self, f, sefer_idx=0):
 		"""Parses the Mechon Mamre sefer file pointed to by f.
 
 		Args:
@@ -62,8 +62,11 @@ class MechonMamreParser(object):
 
 		parsed = BeautifulSoup(f)
 		seforim = parsed.findChildren(name='h1')
-		sefer = torah_model.Sefer(seforim[0].text)
+		sefer_id = 'sefer_%d' % sefer_idx
+		sefer = torah_model.Sefer(seforim[0].text, sefer_idx, sefer_id)
 
+		perek_idx = -1
+		pasuk_idx = -1
 		current_perek = None
 		perek_pasuk_children = parsed.findChildren(name='b')
 
@@ -73,12 +76,19 @@ class MechonMamreParser(object):
 			# May need to open a new perek.
 			if (current_perek is None or
 				current_perek.perek != perek_str):
-				current_perek = torah_model.Perek(perek_str)
+				perek_idx += 1
+				perek_id = 'perek_%d:%d' % (sefer_idx, perek_idx)
+				current_perek = torah_model.Perek(
+					perek_str, perek_idx, perek_id)
 				sefer.append_to_stream(current_perek)
+
 			# Mark the start of a new pasuk.
+			pasuk_idx += 1
+			pasuk_id = 'pasuk_%d:%d:%d' % (sefer_idx, perek_idx, pasuk_idx)
 			# TODO: how do we handle the case the petuha/setumah
 			# come in the middle of a pasuk?
-			current_pasuk = torah_model.PasukStart(pasuk_str)
+			current_pasuk = torah_model.PasukStart(
+				pasuk_str, pasuk_idx, pasuk_id)
 			current_perek.append_to_stream(current_pasuk)
 
 			# Iterate over the text of the pasuk, until we hit the next one.
