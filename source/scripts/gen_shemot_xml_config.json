@@ -1,0 +1,7 @@
+{
+	"config_name": "gen_xml_shemot",
+	"html_filenames": [
+		"../data/mamre.cantillation/c02.htm"
+	],
+	"output_filename": "shemot.xml"
+}
