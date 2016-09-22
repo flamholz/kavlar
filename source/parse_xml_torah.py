@@ -54,3 +54,4 @@ class XmlTorahParser(object):
 	def parse_xml_file(self, f):
 		xml_root = etree.parse(f).getroot()
 		torah_root = self.parse_xml_elt(xml_root)
+		return torah_root

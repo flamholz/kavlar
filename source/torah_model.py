@@ -271,7 +271,7 @@ class FormattedText(TextFragment):
 	def from_tag_name(cls, text, tag_name):
 		kind = cls.NAME_CODES.get(tag_name.title())
 		if kind is None:
-			# Unrecognized formatting.
+			# Unrecognized formatting, return unformatted instance.
 			return TextFragment(text)
 		return cls(text, kind)
 
