@@ -7,7 +7,7 @@ from lxml import etree
 from os import path
 from parse_mm import MechonMamreParser
 from torah_model import Perek, PasukFragment
-from torah_model import Sefer, PasukStart
+from torah_model import Sefer, PasukStart, TextFragment
 
 
 class MechonMamreParserTest(unittest.TestCase):
@@ -67,6 +67,19 @@ class MechonMamreParserTest(unittest.TestCase):
 						self.assertEquals(
 							expected_pasuk_index, elt.pasuk_idx)
 						expected_pasuk_index += 1
+					if type(elt) == PasukFragment:
+						for pasuk_child in elt.iter_stream:
+							if type(pasuk_child) == TextFragment:
+								# Should no longer contain chars demarcating
+								# forced line breaks from petuhot and setumot
+								# because they should have been parsed out
+								disallowed = '{}'
+								for c in disallowed:
+									t = pasuk_child.text
+									msg = (
+										'%s contains disallowed character %s' %
+										(t, c))
+									self.assertFalse(c in t, msg=msg)
 
 		n_sefarim = len(torah.stream)
 		expected_sefarim = 5
