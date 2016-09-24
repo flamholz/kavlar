@@ -81,6 +81,7 @@ class Torah(Stream):
 	def to_tex(self, kavlar_config):
 		kc = kavlar_config
 		params = {'font': kc.get('formatting', 'font')}
+		# TODO: this and footer should be formatted from a template.
 		header = r"""
 \documentclass[english,hebrew]{article}
 \usepackage{amssymb}

@@ -15,6 +15,7 @@ class KavlarConfig(object):
 
 	@classmethod
 	def default_config(cls):
+		"""TODO: add templating configuration for LaTeX."""
 		config = SafeConfigParser()
 		config.add_section('formatting')
 		config.set('formatting', 'aspect_ratio', '4.0')
