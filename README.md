@@ -4,7 +4,7 @@ Torah scrolls have many traditional formatting constraints, including fixed-widt
 
 One especially challenging aspect of manually laying-out a *sefer Torah* is producing fixed-width columns by hand without excessive or insufficient whitespace between words and letters. According to tradition, some letters can be stretched in order to aid in justifying the text. These manipulations have a tendency to compromise the aesthetics and legibility of a text that is read ritually at least thrice weekly in observant Jewish communities. 
 
-The de-facto standard for most new Torah scrolls was developed in the last 30 years by Rabbi Menachem Davidovich of Jerusalem. Davidovich's *tikkun* has 247 42-line columns, follows all *Ashkenazi* scribal traditions and uses no stretched letters. The manual production of such a layout is an incredible feat of human ingenuity, requiring an enormous degree of planning and back-tracking to achieve a fixed-width layout. Indeed, Davidovich dryly told my father Jack that it was "very hard work" ("זו הייתה עבודה קשה מעוד"). 
+The de-facto standard for most new Torah scrolls was developed in the last 30 years by Rabbi Menachem Davidovich of Jerusalem. Davidovich's *tikkun* has 247 42-line columns, follows all *Ashkenazi* scribal traditions and uses no stretched letters. The manual production of such a layout is an incredible feat of human ingenuity, requiring an enormous degree of planning and back-tracking to achieve a fixed-width layout. Indeed, Davidovich dryly told my father Jack that it was "very hard work" ( "זו הייתה עבודה קשה מעוד"). 
 
 Over roughly the same time period, generic algorithms for automating the justification of text have progressed rapidly. The seminal publicaion in this field is due to Donald Knuth and Michael Plass, entitled "Breaking paragraphs into lines" (Software: Practice and Experience, 1981). We think of this project as mediating a virtual dialog between Knuth and Davidovich, two masters in their respective fields. 
 
@@ -29,3 +29,4 @@ This is a partial list of the layout traditions that we know of. It is not yet c
 Kavlar depends on the following Python libraries, which can all be installed with pip.
 * [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) for HTML parsing
 * [lxml](http://lxml.de/) for XML parsing and generation
+* [Jinja2](http://jinja.pocoo.org/) templates for templating LaTeX code
