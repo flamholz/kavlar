@@ -79,32 +79,10 @@ class Torah(Stream):
 		return cls()
 
 	def to_tex(self, kavlar_config):
+		# Header and footer handled by caller.
+		# As such, no required formatting for Torah elements.
 		kc = kavlar_config
-		params = {'font': kc.get('formatting', 'font')}
-		# TODO: this and footer should be formatted from a template.
-		header = r"""
-\documentclass[english,hebrew]{article}
-\usepackage{amssymb}
-\usepackage{fontspec}
-\setmainfont[Mapping=tex-text]{%(font)s}
-\setsansfont[Mapping=tex-text]{%(font)s}
-\setmonofont{%(font)s}
-
-\frenchspacing
-
-\usepackage{xunicode}
-\usepackage{polyglossia}
-\setdefaultlanguage{hebrew}
-\setotherlanguage{english}
-\begin{document}"""
-		header = header % params
-		header += '\n'
-
-		footer = r"\end{document}" + "\n"
-
-		l = [header]
-		l.extend(self.get_stream_tex(kc))
-		l.extend(footer)
+		l = self.get_stream_tex(kc)
 		return ''.join(l)
 
 
