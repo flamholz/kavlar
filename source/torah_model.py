@@ -6,6 +6,16 @@
 from lxml import etree
 
 
+class TeXAble(object):
+
+	def to_tex(self, kavlar_config):
+		"""Returns tex code for this element."""
+		msg = (
+			'%s does not implement to_tex' %
+			self.__class__.__name__)
+		raise NotImplementedError(msg)
+
+
 class XmlAble(object):
 	"""Interface for items in the hierarchy that can be made to/from XML."""
 
@@ -28,7 +38,7 @@ class XmlAble(object):
 		raise NotImplementedError(msg)
 
 
-class Stream(XmlAble):
+class Stream(XmlAble, TeXAble):
 	"""Interface for elements well-represented as a stream of children."""
 
 	def append_to_stream(self, elt):
@@ -42,6 +52,12 @@ class Stream(XmlAble):
 		"""Elements in the stream must implement XmlAble."""
 		for child in self.iter_stream:
 			child.add_to_xml_tree(xml_elt)
+
+	def get_stream_tex(self, kavlar_config):
+		"""Returns a list of unicode strings of TeX code."""
+		kc = kavlar_config
+		return [c.to_tex(kc) for c in self.stream]
+
 
 class Torah(Stream):
 	"""Ordered stream of Sefarim."""
@@ -61,6 +77,34 @@ class Torah(Stream):
 	@classmethod
 	def from_xml_elt(cls, xml_elt):
 		return cls()
+
+	def to_tex(self, kavlar_config):
+		kc = kavlar_config
+		params = {'font': kc.get('formatting', 'font')}
+		header = r"""
+\documentclass[english,hebrew]{article}
+\usepackage{amssymb}
+\usepackage{fontspec}
+\setmainfont[Mapping=tex-text]{%(font)s}
+\setsansfont[Mapping=tex-text]{%(font)s}
+\setmonofont{%(font)s}
+
+\frenchspacing
+
+\usepackage{xunicode}
+\usepackage{polyglossia}
+\setdefaultlanguage{hebrew}
+\setotherlanguage{english}
+\begin{document}"""
+		header = header % params
+		header += '\n'
+
+		footer = r"\end{document}" + "\n"
+
+		l = [header]
+		l.extend(self.get_stream_tex(kc))
+		l.extend(footer)
+		return ''.join(l)
 
 
 class Sefer(Stream):
@@ -102,6 +146,14 @@ class Sefer(Stream):
 		sefer_name = attributes["name"]
 		return cls(sefer_name, sefer_idx, sefer_id)
 
+	def to_tex(self, kavlar_config):
+		kc = kavlar_config
+		tex = r"\section{%s}" % self.name + "\n"
+
+		l = [tex]
+		l.extend(self.get_stream_tex(kc))
+		return ''.join(l)
+
 
 class Perek(Stream):
 	"""A chapter marker. Contains text fragments and various markers."""
@@ -139,8 +191,14 @@ class Perek(Stream):
 		perek = attributes["perek"]
 		return cls(perek, perek_idx, perek_id)
 
+	def to_tex(self, kavlar_config):
+		# For now the perek is silent.
+		kc = kavlar_config
+		l = self.get_stream_tex(kc)
+		return ''.join(l)
 
-class PasukStart(XmlAble):
+
+class PasukStart(XmlAble, TeXAble):
 	"""Demarcates the start of a new verse."""
 	def __init__(self, pasuk, pasuk_idx, pasuk_id):
 		"""Initialize.
@@ -174,6 +232,10 @@ class PasukStart(XmlAble):
 		pasuk = attributes["pasuk"]
 		return cls(pasuk, pasuk_idx, pasuk_id)
 
+	def to_tex(self, kavlar_config):
+		# For now the pasuk start is just whitespace.
+		return '\n'
+
 
 class PasukFragment(Stream):
 
@@ -203,8 +265,14 @@ class PasukFragment(Stream):
 		pasuk_id = attributes["pasuk_id"]
 		return cls(pasuk_id)
 
+	def to_tex(self, kavlar_config):
+		# For now the pasuk is silent.
+		kc = kavlar_config
+		l = self.get_stream_tex(kc)
+		return ''.join(l)
 
-class TextFragment(XmlAble):
+
+class TextFragment(XmlAble, TeXAble):
 	"""A fragment of text contained within a sefer."""
 
 	def __init__(self, text):
@@ -235,6 +303,9 @@ class TextFragment(XmlAble):
 	def from_xml_elt(cls, xml_elt):
 		text = xml_elt.text
 		return cls(text)
+
+	def to_tex(self, kavlar_config):
+		return self.text
 
 
 class FormattedText(TextFragment):
@@ -275,8 +346,16 @@ class FormattedText(TextFragment):
 			return TextFragment(text)
 		return cls(text, kind)
 
+	def to_tex(self, kavlar_config):
+		fmt = r'%s'
+		if self.kind == self.BIG:
+			fmt = r'{\Large %s}'
+		elif self.kind == self.SMALL:
+			fmt = r'{\Small %s}'
+		return fmt % self.text
 
-class ParashaDelimiter(XmlAble):
+
+class ParashaDelimiter(XmlAble, TeXAble):
 	PETUHA = -1
 	SETUMA = -2
 	BOOK_END = -3
@@ -320,3 +399,6 @@ class ParashaDelimiter(XmlAble):
 		tag = xml_elt.tag
 		kind = cls.NAME_CODES[tag]
 		return cls(kind)
+
+	def to_tex(self, kavlar_config):
+		return r'\\' + "\n"

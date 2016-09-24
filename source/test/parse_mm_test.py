@@ -6,7 +6,7 @@ import unittest
 from lxml import etree
 from os import path
 from parse_mm import MechonMamreParser
-from torah_model import Perek, PasukFragment
+from torah_model import Perek, PasukFragment, FormattedText
 from torah_model import Sefer, PasukStart, TextFragment
 
 
@@ -69,7 +69,8 @@ class MechonMamreParserTest(unittest.TestCase):
 						expected_pasuk_index += 1
 					if type(elt) == PasukFragment:
 						for pasuk_child in elt.iter_stream:
-							if type(pasuk_child) == TextFragment:
+							if (type(pasuk_child) == TextFragment or
+								type(pasuk_child) == FormattedText):
 								# Should no longer contain chars demarcating
 								# forced line breaks from petuhot and setumot
 								# because they should have been parsed out

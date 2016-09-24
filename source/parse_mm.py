@@ -21,18 +21,27 @@ class MechonMamreParser(object):
 	def __init__(self):
 		pass
 
-	PARASHA_PATTERN = re.compile(r'\s+({.})\s*$')
+	PARASHA_PATTERN = re.compile(r'({.})')
 
 	@classmethod
-	def strip_parsha_delimiter(cls, text):
-		spaceless = text.strip()
-		ms = re.findall(cls.PARASHA_PATTERN, spaceless)
-		if not ms:
-			return spaceless, None
+	def split_on_parsha_delimiter(cls, text):
+		"""Returns a list of TextFragments and ParashaDelimiters.
 
-		delim = ms[0].strip('{}')
-		stripped = re.sub(cls.PARASHA_PATTERN, '', spaceless)
-		return stripped, delim
+		# TODO: does *qeri* survive parsing into the XML?
+		"""
+		spaceless = text.strip()
+		ms = re.split(cls.PARASHA_PATTERN, spaceless)
+		ret = []
+		for sub_s in ms:
+			if re.findall(cls.PARASHA_PATTERN, sub_s):
+				delim = sub_s.strip('{}')
+				pdelim = torah_model.ParashaDelimiter.from_letter_code(delim)
+				ret.append(pdelim)
+			elif sub_s.strip():
+				# non-empty string can be added as plain old text.
+				t = torah_model.TextFragment(sub_s)
+				ret.append(t)
+		return ret
 
 	@staticmethod
 	def get_tag_name(node):
@@ -104,21 +113,14 @@ class MechonMamreParser(object):
 						sib.text, tag_name)
 					current_pasuk_fragment.append_to_stream(child)
 				else:
-					child = torah_model.TextFragment(unicode(sib))
-					current_pasuk_fragment.append_to_stream(child)
+					text = unicode(sib)
+					children = self.split_on_parsha_delimiter(text)
+					for c in children:
+						current_pasuk_fragment.append_to_stream(c)
 
 				# Move to next sibling
 				sib = sib.nextSibling
-
 			current_perek.append_to_stream(current_pasuk_fragment)
-
-			# TODO: what if the delimiter is not at the end of the fragment?
-			tail_text = current_pasuk_fragment.stream[-1].text
-			stripped_tail_text, delim = self.strip_parsha_delimiter(tail_text)
-			current_pasuk_fragment.stream[-1].text = stripped_tail_text
-			if delim is not None:
-				pdelim = torah_model.ParashaDelimiter.from_letter_code(delim)
-				current_perek.append_to_stream(pdelim)
 
 		return sefer
 

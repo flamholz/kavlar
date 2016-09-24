@@ -19,6 +19,7 @@ class KavlarConfig(object):
 		config.add_section('formatting')
 		config.set('formatting', 'aspect_ratio', '4.0')
 		config.set('formatting', 'lines_per_col', '42')
+		config.set('formatting', 'font', 'Stam Ashkenaz CLM')
 		config.set('formatting', 'strip_vowels', 'True')
 		config.set(
 			'formatting', 'strip_cantillation_marks', 'True')
