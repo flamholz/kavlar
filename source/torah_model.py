@@ -105,15 +105,15 @@ class Sefer(Stream):
 		return self.name
 
 	def __str__(self):
-		return unicode(self.name).encode('utf-8')
+		return self.name
 
 	def append_to_stream(self, elt):
 		self.stream.append(elt)
 
 	def add_to_xml_tree(self, xml_elt):
 		self_xml = etree.Element(
-			self.__class__.__name__, name=self.name,
-			id=self.sefer_id, index=str(self.sefer_idx))
+			self.__class__.__name__,
+			id=self.sefer_id, index=str(self.sefer_idx), name=self.name)
 		self.add_stream_to_xml_tree(self_xml)
 		xml_elt.append(self_xml)
 
@@ -153,12 +153,12 @@ class Perek(Stream):
 		return self.perek
 
 	def __str__(self):
-		return unicode(self.perek).encode('utf-8')
+		return self.perek
 
 	def add_to_xml_tree(self, xml_elt):
 		self_xml = etree.Element(
-			self.__class__.__name__, perek=self.perek,
-			id=self.perek_id, index=str(self.perek_idx))
+			self.__class__.__name__,
+			id=self.perek_id, index=str(self.perek_idx), perek=self.perek)
 		self.add_stream_to_xml_tree(self_xml)
 		xml_elt.append(self_xml)
 
@@ -195,12 +195,12 @@ class PasukStart(XmlAble, TeXAble):
 		return self.perek
 
 	def __str__(self):
-		return unicode(self.perek).encode('utf-8')
+		return self.perek
 
 	def add_to_xml_tree(self, xml_elt):
 		self_xml = etree.Element(
-			self.__class__.__name__, pasuk=self.pasuk,
-			id=self.pasuk_id, index=str(self.pasuk_idx))
+			self.__class__.__name__,
+			id=self.pasuk_id, index=str(self.pasuk_idx), pasuk=self.pasuk)
 		xml_elt.append(self_xml)
 
 	@classmethod
@@ -271,7 +271,7 @@ class TextFragment(XmlAble, TeXAble):
 		return self.text
 
 	def __str__(self):
-		return unicode(self.text).encode('utf-8')
+		return self.text
 
 	def add_to_xml_tree(self, xml_elt):
 		self_xml = etree.Element(self.__class__.__name__)
@@ -295,7 +295,7 @@ class FormattedText(TextFragment):
 		BIG: "Big",
 		SMALL: "Small"
 	}
-	NAME_CODES = dict((n, c) for c, n in CODE_NAMES.iteritems())
+	NAME_CODES = dict((n, c) for c, n in CODE_NAMES.items())
 
 	def __init__(self, text, kind=None):
 		super(FormattedText, self).__init__(text)
@@ -351,7 +351,7 @@ class ParashaDelimiter(XmlAble, TeXAble):
 		BOOK_END: "SeferEnd",
 		SHIRAH_LINE_BREAK: "ShiratHayamLineBreak"
 	}
-	NAME_CODES = dict((n, c) for c, n in CODE_NAMES.iteritems())
+	NAME_CODES = dict((n, c) for c, n in CODE_NAMES.items())
 
 	def __init__(self, kind=None):
 		assert kind in self.CODE_NAMES

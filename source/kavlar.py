@@ -9,7 +9,7 @@ import re
 import tex_templating
 import torah_model
 
-from ConfigParser import SafeConfigParser
+from configparser import ConfigParser
 
 
 class KavlarConfig(object):
@@ -17,7 +17,7 @@ class KavlarConfig(object):
 	@classmethod
 	def default_config(cls):
 		"""TODO: add templating configuration for LaTeX."""
-		config = SafeConfigParser()
+		config = ConfigParser()
 		config.add_section('formatting')
 		config.set('formatting', 'aspect_ratio', '4.0')
 		config.set('formatting', 'lines_per_col', '42')

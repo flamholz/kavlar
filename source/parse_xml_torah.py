@@ -36,7 +36,7 @@ class XmlTorahParser(object):
 		pass
 
 	def parse_xml_filename(self, fname):
-		with open(fname, 'rU') as f:
+		with open(fname, 'rb') as f:
 			return self.parse_xml_file(f)
 
 	def parse_xml_elt(self, xml_elt):
