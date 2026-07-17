@@ -13,7 +13,7 @@ which were downloaded on 09/20/2016 and are checked into
 import re
 import torah_model
 
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
 
 
 class MechonMamreParser(object):
@@ -46,7 +46,7 @@ class MechonMamreParser(object):
 	@staticmethod
 	def get_tag_name(node):
 		"""Given a generic BeautifulSoup node, returns the tag name."""
-		if hasattr(node, 'name'):
+		if getattr(node, 'name', None):
 			return node.name.lower()
 		return None
 
@@ -59,7 +59,7 @@ class MechonMamreParser(object):
 		Args:
 			fname: path to Mechon Mamre file.
 		"""
-		with open(fname, 'rU') as f:
+		with open(fname, 'r', encoding='utf-8') as f:
 			return self.parse_sefer_file(f, sefer_idx)
 
 	def parse_sefer_file(self, f, sefer_idx=0):
@@ -69,7 +69,7 @@ class MechonMamreParser(object):
 			f: file handle to Mechon Mamre file.
 		"""
 
-		parsed = BeautifulSoup(f)
+		parsed = BeautifulSoup(f, 'lxml')
 		seforim = parsed.findChildren(name='h1')
 		sefer_id = 'sefer_%d' % sefer_idx
 		sefer = torah_model.Sefer(seforim[0].text, sefer_idx, sefer_id)
@@ -113,7 +113,7 @@ class MechonMamreParser(object):
 						sib.text, tag_name)
 					current_pasuk_fragment.append_to_stream(child)
 				else:
-					text = unicode(sib)
+					text = str(sib)
 					children = self.split_on_parsha_delimiter(text)
 					for c in children:
 						current_pasuk_fragment.append_to_stream(c)

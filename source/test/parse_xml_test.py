@@ -19,7 +19,7 @@ class XmlTorahParserTest(unittest.TestCase):
 
 	def _norm_xml_string_for_fname(self, fname):
 		"""Parse XML from file, write out again normalized."""
-		with open(fname, 'rU') as f:
+		with open(fname, 'rb') as f:
 			parsed = etree.parse(f)
 			return self._xml_to_string(parsed.getroot())
 

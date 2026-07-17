@@ -23,24 +23,24 @@ def main():
 	args = parser.parse_args()
 
 	# Load JSON configuration file.
-	print 'Reading configuration from', args.config_filename
+	print('Reading configuration from', args.config_filename)
 	assert path.exists(args.config_filename)
-	with open(args.config_filename, 'rU') as config_f:
+	with open(args.config_filename, 'r', encoding='utf-8') as config_f:
 		config = json.load(config_f)
 
 	html_filenames = config['html_filenames']
 	output_filename = config['output_filename']
 
-	print 'Parsing files:'
+	print('Parsing files:')
 	for fname in html_filenames:
-		print fname
+		print(fname)
 
 	parser = MechonMamreParser()
 	torah = parser.parse_torah_filenames(html_filenames)
 	torah_xml_elt = torah.to_xml_elt()
 
-	print 'Writing XML output to', output_filename
-	with open(output_filename, 'w') as out_f:
+	print('Writing XML output to', output_filename)
+	with open(output_filename, 'wb') as out_f:
 		xml_data = etree.tostring(
 			torah_xml_elt, pretty_print=True,
 			xml_declaration=True, encoding='utf-8')

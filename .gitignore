@@ -90,3 +90,14 @@ ENV/
 
 # OS X files
 .DS_Store
+
+# Kavlar generated LaTeX/PDF output and TeX build artifacts
+test_tex/
+*.aux
+*.pdf
+*.toc
+*.out
+
+# Locally downloaded fonts (e.g. Stam Ashkenaz CLM from Culmus)
+stam-ashkenaz-clm-medium/
+stam-ashkenaz-clm-medium.zip
